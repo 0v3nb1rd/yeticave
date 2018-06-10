@@ -76,3 +76,35 @@ function db_get_prepare_stmt($link, $sql, $data = []) {
 function show_error(&$content, $error) {
     $content = renderTemplate('templates/error.php', ['error' => $error]);
 }
+
+
+
+/**
+ * получение списка категорий
+ *
+ * @param array $connection ресурс подключения
+ * @return array список категорий
+ */
+function getItemList($connection) {
+    $sql = 'SELECT c.id, c.category FROM categories c ORDER BY c.id';
+    return checkResult($connection, $sql);
+}
+
+/**
+ * проверка запроса и возврат результатов выборки
+ *
+ * @param array $connection ресурс подключения
+ * @param string $sql текст запроса
+ * @return array|null
+ */
+function checkResult($connection, $sql) {
+    $mysqliResult = mysqli_query($connection, $sql);
+    $error = '';
+    if ($mysqliResult === false) {
+        $error = mysqli_error($connection);
+        print('Ошибка MySQL: '. $error);
+        die();
+    }
+    $rows = mysqli_fetch_all($mysqliResult, MYSQLI_ASSOC );
+    return $rows;
+}

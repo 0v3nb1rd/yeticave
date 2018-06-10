@@ -3,7 +3,7 @@
 require_once ('functions.php');
 require_once ('config.php');
 require_once ('data.php');
-require_once ('userdata.php');
+//require_once ('userdata.php');
 
 require_once ('init.php');
 require_once ('config/db.php');
@@ -42,7 +42,7 @@ else {
         }
         else {
             $error = mysqli_error($link);
-            $content = renderTemplate('templates/error.php', ['error' => $error]);
+            $main_cont = renderTemplate('templates/error.php', ['error' => $error]);
         }
 
 

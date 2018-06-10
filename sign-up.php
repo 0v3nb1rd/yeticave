@@ -34,6 +34,7 @@ else {
         $errors = [];
 
 
+
         $sql = 'INSERT INTO users (`name`, `email`, `password_hash`) VALUES (?, ?, ?)' ;
         $password_hash = password_hash($form['password'], PASSWORD_DEFAULT);
         $stmt = db_get_prepare_stmt($link, $sql, [$form['name'], $form['email'], $password_hash]);
@@ -52,6 +53,8 @@ else {
                 $errors[$field] = 'Єто поле надо заполнить';
             }
         }
+
+
         if (count($errors)) {
             $main_cont = renderTemplate('templates/sign-up.php', [
                 'nav_cont' => $nav_cont,
